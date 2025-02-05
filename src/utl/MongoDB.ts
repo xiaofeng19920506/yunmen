@@ -20,7 +20,7 @@ async function connectToDatabase() {
   try {
     // Connect to MongoDB if no cached connection exists
     await client.connect();
-    const db = client.db("your-database-name"); // Replace with your actual DB name
+    const db = client.db("user"); // Replace with your actual DB name
     cachedClient = client;
     cachedDb = db;
 
