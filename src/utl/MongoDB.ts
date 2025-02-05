@@ -1,11 +1,11 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 
 // Use a regular environment variable, not NEXT_PUBLIC_ for sensitive data
 const uri = process.env.MONGO_CONNECTION || ""; // This should be in your .env file
 const client = new MongoClient(uri);
 
 let cachedClient: MongoClient | null = null;
-let cachedDb: any = null;
+let cachedDb: Db | null = null; // Specify the type of cachedDb as Db
 
 // Function to connect to MongoDB
 async function connectToDatabase() {
