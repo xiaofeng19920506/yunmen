@@ -1,5 +1,4 @@
 import { fetchData } from "@/utl/MongoDB";
-import styles from "./page.module.css";
 
 export default async function Home() {
   const data = await fetchData();
@@ -17,7 +16,6 @@ export default async function Home() {
             {person?.events[0]?.eventId}
             <span>{person?.events[0]?.checked}</span>
           </div>
-          
         </div>
       );
     })
