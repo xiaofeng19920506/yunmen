@@ -33,10 +33,10 @@ async function connectToDatabase() {
 }
 
 // Function to fetch data from a collection
-export async function fetchData(collectionName: string) {
+export async function fetchData() {
   try {
     const { db } = await connectToDatabase();
-    const collection = db.collection(collectionName);
+    const collection = db.collection("user");
     const data = await collection.find({}).toArray();
     return data;
   } catch (err) {
