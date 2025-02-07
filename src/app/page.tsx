@@ -17,6 +17,7 @@ export default async function Home() {
             {person?.events[0]?.eventId}
             <span>{person?.events[0]?.checked}</span>
           </div>
+          
         </div>
       );
     })
