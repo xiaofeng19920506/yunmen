@@ -1,23 +1,19 @@
-import { fetchData } from "@/utl/MongoDB";
-
+import Link from "next/link";
 export default async function Home() {
-  const data = await fetchData();
-
-  console.log({ data });
-
   return (
-    data &&
-    data.length > 0 &&
-    data.map((person) => {
-      return (
-        <div key={person?._id.toString()}>
-          {person?.name}
-          <div key={person?.events[0]}>
-            {person?.events[0]?.eventId}
-            <span>{person?.events[0]?.checked}</span>
-          </div>
-        </div>
-      );
-    })
+    <div>
+      <header>
+        {/* Login button in the top right */}
+        <Link href="/login">Login</Link>
+      </header>
+
+      <main>
+        <h1>Welcome to Our Next.js App</h1>
+        <p>
+          This is the home page. Click the login button in the top-right corner
+          to sign in.
+        </p>
+      </main>
+    </div>
   );
 }
