@@ -12,8 +12,7 @@ type UserType = {
 export async function POST(reqest: NextRequest) {
   try {
     const requestBody: UserType = await reqest.json();
-    const { email, username, password } = requestBody;
-    console.log(requestBody, email, username, password);
+    const { email, password } = requestBody;
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -38,18 +37,18 @@ export async function POST(reqest: NextRequest) {
       email: user.email,
     };
 
-    console.log(process.env.JWT_SECRET);
-
     const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
       expiresIn: "1d",
     });
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       { message: "Log In Success", success: true },
       { status: 200 }
-    ).cookies.set("token", token, {
-      httpOnly: true
+    );
+    response.cookies.set("token", token, {
+      httpOnly: true,
     });
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }

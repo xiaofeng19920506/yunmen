@@ -5,6 +5,7 @@ export default async function Home() {
       <header>
         {/* Login button in the top right */}
         <Link href="/login">Login</Link>
+        <Link href="/signup">Register</Link>
       </header>
 
       <main>
