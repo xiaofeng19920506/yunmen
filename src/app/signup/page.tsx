@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import AuthModal from "../components/modal";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,6 @@ type SignUpProp = {
 };
 
 const SignUp = () => {
-  const [open, setOpen] = useState<boolean>(true);
   const router = useRouter();
   const handleSubmit = async ({ email, password, name }: SignUpProp) => {
     try {
@@ -25,18 +24,10 @@ const SignUp = () => {
         router.push("/login");
       }
     } catch (error) {
-      setOpen(true);
       console.log(error);
     }
   };
-  return (
-    <AuthModal
-      open={open}
-      handleClose={() => setOpen(false)}
-      handleSubmit={handleSubmit}
-      mode={"signUp"}
-    />
-  );
+  return <AuthModal handleSubmit={handleSubmit} mode={"signUp"} />;
 };
 
 export default SignUp;

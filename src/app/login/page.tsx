@@ -30,14 +30,7 @@ const SignIn = () => {
     }
   };
 
-  return (
-    <AuthModal
-      open={open}
-      handleClose={() => setOpen(false)}
-      handleSubmit={handleSubmit}
-      mode={"signIn"}
-    />
-  );
+  return <AuthModal handleSubmit={handleSubmit} mode={"signIn"} />;
 };
 
 export default SignIn;

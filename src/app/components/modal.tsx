@@ -1,32 +1,14 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button, TextField, Box, Typography } from "@mui/material";
 import Link from "next/link";
 
 type ModalProp = {
-  open: boolean;
-  handleClose: () => void;
   handleSubmit: (prop: any) => void;
   mode: "signIn" | "signUp";
 };
 
-const AuthModal: React.FC<ModalProp> = ({
-  open,
-  handleClose,
-  mode,
-  handleSubmit,
-}) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value);
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
-
+const AuthModal: React.FC<ModalProp> = ({ mode, handleSubmit }) => {
+  async function handleAuth() {}
   return (
     <Box
       sx={{
@@ -46,46 +28,28 @@ const AuthModal: React.FC<ModalProp> = ({
       <Typography variant="h6" component="h2">
         {mode === "signUp" ? "Sign Up" : "Sign In"}
       </Typography>
+      <form>
+        {mode === "signUp" && (
+          <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+          />
+        )}
+        <input type="email" name="email" />
+        <input type="password" name="password" />
 
-      {mode === "signUp" && (
-        <TextField
-          label="Name"
-          variant="outlined"
-          fullWidth
-          value={name}
-          onChange={handleNameChange}
-          margin="normal"
-        />
-      )}
-      <TextField
-        label="Email"
-        variant="outlined"
-        fullWidth
-        value={email}
-        onChange={handleEmailChange}
-        margin="normal"
-      />
-      <TextField
-        label="Password"
-        variant="outlined"
-        fullWidth
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        margin="normal"
-      />
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+          <Button
+            onClick={}
+            color="primary"
+          >
+            {mode === "signUp" ? "Sign Up" : "Sign In"}
+          </Button>
+        </Box>
+      </form>
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-        <Button onClick={handleClose} color="secondary">
-          Cancel
-        </Button>
-        <Button
-          onClick={() => handleSubmit({ email, name, password })}
-          color="primary"
-        >
-          {mode === "signUp" ? "Sign Up" : "Sign In"}
-        </Button>
-      </Box>
       <Link href={mode === "signUp" ? "/login" : "/signup"}>
         {mode === "signUp" ? "Please Sign In" : "Please Sign Up"}
       </Link>
