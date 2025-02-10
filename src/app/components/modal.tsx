@@ -1,14 +1,19 @@
+// app/components/AuthModal.tsx
 import React from "react";
 import { Button, TextField, Box, Typography } from "@mui/material";
 import Link from "next/link";
 
 type ModalProp = {
-  handleSubmit: (prop: any) => void;
   mode: "signIn" | "signUp";
+  handleSignIn: (formData: FormData) => Promise<void>;
+  handleSignUp: (formData: FormData) => Promise<void>;
 };
 
-const AuthModal: React.FC<ModalProp> = ({ mode, handleSubmit }) => {
-  async function handleAuth() {}
+const AuthModal: React.FC<ModalProp> = ({
+  mode,
+  handleSignIn,
+  handleSignUp,
+}) => {
   return (
     <Box
       sx={{
@@ -28,23 +33,39 @@ const AuthModal: React.FC<ModalProp> = ({ mode, handleSubmit }) => {
       <Typography variant="h6" component="h2">
         {mode === "signUp" ? "Sign Up" : "Sign In"}
       </Typography>
-      <form>
+
+      <form action={mode === "signIn" ? handleSignIn : handleSignUp}>
         {mode === "signUp" && (
           <TextField
             label="Name"
             variant="outlined"
             fullWidth
             margin="normal"
+            name="name"
+            required
           />
         )}
-        <input type="email" name="email" />
-        <input type="password" name="password" />
+        <TextField
+          label="Email"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          name="email"
+          type="email"
+          required
+        />
+        <TextField
+          label="Password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          name="password"
+          type="password"
+          required
+        />
 
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-          <Button
-            onClick={}
-            color="primary"
-          >
+          <Button type="submit" color="primary">
             {mode === "signUp" ? "Sign Up" : "Sign In"}
           </Button>
         </Box>
